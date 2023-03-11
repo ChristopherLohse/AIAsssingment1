@@ -16,6 +16,21 @@ class Search:
         self.current = self.start
         self.steps = 0
     
+
+    def reversePath(self):
+        # reverse the path to get the optimal path
+        current = self.end
+        path = []
+        while current != self.start:
+            for node in self.path:
+                if node[1] == current:
+                    path.append(node)
+                    current = node[0]
+                    break
+        self.path = path
+        
+
+
     def solve(self):
         start = datetime.now()
         if self.current == self.end:
@@ -37,8 +52,8 @@ class Search:
                 if neighbour not in self.visited and neighbour not in self.queue:
                     self.addtoqueue(neighbour)
                     self.path.append((self.current, neighbour))
-                    self.visited.append(neighbour)
                     self.steps += 1
+
 
     def getNext(self): # abstract method to be implemented by the subclasses
         pass
